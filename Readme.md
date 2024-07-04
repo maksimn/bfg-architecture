@@ -1,13 +1,13 @@
 # The Builder-Feature-Graph Architecture.
 
-The Builder-Feature-Graph Architecture (the BFG Architecture, BFGA, BFG for short) is a general approach to iOS app architecture for complex large-scale apps.
+The Builder-Feature-Graph Architecture (the BFG Architecture, BFGA for short) is a general approach to iOS app architecture for complex large-scale apps.
 
 This approach focuses on creational code and its composition, not on a specific framework or pattern like MVP, MVVM, RIBs, TCA etc.
 
 * [Origins of the BFG Architecture](#origins-of-the-bfg-architecture)
 * [A General Guide to Architecture and App Feature Development](#a-general-guide-to-architecture-and-app-feature-development)
 * [Builders](#builders)
-* [A Feature Graph](#a-feature-graph)
+* [Feature Graph](#feature-graph)
 * [Communication between features](#communication-between-features)
 * [The BFGA example](#the-bfga-example)
 
@@ -15,8 +15,8 @@ This approach focuses on creational code and its composition, not on a specific 
 
 The BFGA has several sources:
 
-* [RIBs](https://github.com/uber/RIBs) mobile architecture framework by Uber.
-* [Graph-module approach](https://www.youtube.com/watch?v=iN8BtJxRBWs) by Yandex.
+* [RIBs](https://github.com/uber/RIBs) mobile architecture framework by Uber. A concept of _Builder_ has been taken from it.
+* [Graph-module approach](https://www.youtube.com/watch?v=iN8BtJxRBWs) by Yandex. A concept of _Graph_ is from this approach.
 * Other common architectures, design patterns, SOLID principles, MVC, MVP, VIPER, Undirectional Data Flow etc.
 
 ## A General Guide to Architecture and App Feature Development.
@@ -25,7 +25,7 @@ An app is implemented as a __feature tree__. __Feature__ is an entity that repre
 
 A feature can use services or other types of dependencies. The distinction between features and dependencies can be subjective.
 
-Do not use global objects, variables and any implicit dependencies because their usage is a bad practice.
+Do not use global objects, variables and any implicit dependencies.
 
 ## Builders
 
@@ -56,11 +56,27 @@ A builder of a feature is created by a builder of a parent feature. A task of th
 
 To include a feature in a component of a project you need to pass a builder of the feature to an initializer of the component.
 
-## A Feature Graph
+## Feature Graph
 
-In short, a __*feature graph*__ is a DI-contaner having an output of functionality that can be used in the project.
+In short, a __*feature graph*__ is a DI-contaner having an output of functionality that can be used in a project.
 
 A [video](https://www.youtube.com/watch?v=iN8BtJxRBWs) from Yandex where a concept of feature graph is explained.
+
+```swift
+protocol AppGraph {
+
+    var firstScreen: UIViewController { get }
+
+    var pushNotificationHandler: AppPushNotificationHandler { get }
+}
+
+protocol SomeGraph {
+
+    var view: UIView { get }
+
+    var model: SomeModel { get }
+}
+```
 
 A feature graph is a general concept for a feature having two or more outputs. If a feature is represented as a single object then the feature graph is redundant. For example, if a feature consists of an only screen then a builder should look like this:
 
