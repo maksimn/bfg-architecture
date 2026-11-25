@@ -29,7 +29,7 @@ Avoid using global objects, global variables, or any implicit dependencies. 
 
 ## Builders
 
-A feature is instantiated by a _builder_. In general, a builder looks like:
+A feature is instantiated by a _builder_. In general, a builder follows this structure: 
 
 ```swift
 protocol FeatureBuilder {
@@ -50,11 +50,11 @@ final class FeatureBuilderImpl: FeatureBuilder {
 }
 ```
 
-A goal of a builder is to call a __feature graph__ initializer with required dependencies. Every feature has its own dependency scope. The feature gets external dependencies from the initializer of its builder. Inner dependencies are defined inside the scope of the builder.
+The primary purpose of a builder is to invoke a __feature graph__ initializer with the required dependencies. Every feature maintains its own dependency scope: external dependencies are passed into the builder's initializer, while internal dependencies are defined within the builder's scope. 
 
-A builder of a feature is created by a builder of a parent feature. A task of the parent feature is to choose an implementation of the builder of the child feature and to pass dependencies to it. These features do not have to have other logical connections between each other.
+A feature's builder is instantiated by the builder of its parent feature. The parent feature is responsible for selecting an implementation of the child feature's builder and supplying its dependencies. Beyond this relationship, parent and child features do not require any further logical coupling. 
 
-To include a feature in a component of a project you need to pass a builder of the feature to an initializer of the component.
+To integrate a feature into a project component, pass the feature's builder into that component's initializer. 
 
 ## Feature Graph
 
