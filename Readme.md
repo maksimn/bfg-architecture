@@ -21,11 +21,11 @@ The BFGA has several sources:
 
 ## A General Guide to Architecture and App Feature Development.
 
-An app is implemented as a __feature tree__. __Feature__ is an entity that represents product functionality or carries out an important role in a product.
+An application is structured as a __feature tree__. A __feature__ is an entity that represents a distinct piece of product functionality or fulfills a critical role within the product. 
 
-A feature can use services or other types of dependencies. The distinction between features and dependencies can be subjective.
+A feature may rely on services or other types of dependencies, though the distinction between features and dependencies can sometimes be subjective. 
 
-Do not use global objects, variables and any implicit dependencies.
+Avoid using global objects, global variables, or any implicit dependencies. 
 
 ## Builders
 
