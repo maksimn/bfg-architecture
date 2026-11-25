@@ -15,7 +15,7 @@ This approach focuses on creational code and its composition rather than on a sp
 
 The BFGA has several sources:
 
-* **Uber’s** [RIBs](https://github.com/uber/RIBs) **mobile architecture framework**, from which the concept of a _Builder_ is adapted.
+* **Uber’s RIBs mobile architecture framework**, from which the concept of a _Builder_ is adapted.
 * [Yandex’s graph-module approach](https://www.youtube.com/watch?v=iN8BtJxRBWs), from which the concept of a _Graph_ originates.
 * Other established architectures and design patterns, including SOLID principles, MVC, MVP, MVVM, VIPER, and Unidirectional Data Flow.
 
