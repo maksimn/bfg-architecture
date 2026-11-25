@@ -1,8 +1,8 @@
 # The Builder-Feature-Graph Architecture.
 
-The Builder-Feature-Graph Architecture (the BFG Architecture, BFGA for short) is a general approach to iOS app architecture for complex large-scale apps.
+The Builder-Feature-Graph Architecture (the BFG Architecture, or BFGA for short) is a general architectural approach for complex, large-scale iOS applications. 
 
-This approach focuses on creational code and its composition, not on a specific framework or pattern like MVP, MVVM, RIBs, TCA etc.
+This approach focuses on creational code and its composition rather than on a specific framework or pattern, such as MVP, MVVM, RIBs, or TCA. 
 
 * [Origins of the BFG Architecture](#origins-of-the-bfg-architecture)
 * [A General Guide to Architecture and App Feature Development](#a-general-guide-to-architecture-and-app-feature-development)
