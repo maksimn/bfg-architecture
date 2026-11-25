@@ -13,7 +13,7 @@ This approach focuses on creational code and its composition rather than on a sp
 
 ## Origins of the BFG Architecture
 
-The BFGA has several sources:
+The BFGA draws from several sources:
 
 * **Uber’s RIBs mobile architecture framework**, from which the concept of a _Builder_ is adapted.
 * [Yandex’s graph-module approach](https://www.youtube.com/watch?v=iN8BtJxRBWs), from which the concept of a _Graph_ originates.
