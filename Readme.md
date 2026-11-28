@@ -1,8 +1,8 @@
 # The Builder-Feature-Graph Architecture.
 
-The Builder-Feature-Graph Architecture (the BFG Architecture, BFGA for short) is a general approach to iOS app architecture for complex large-scale apps.
+The Builder-Feature-Graph Architecture (the BFG Architecture, or BFGA for short) is a general architectural approach for complex, large-scale iOS applications. 
 
-This approach focuses on creational code and its composition, not on a specific framework or pattern like MVP, MVVM, RIBs, TCA etc.
+This approach focuses on creational code and its composition rather than on a specific framework or pattern, such as MVP, MVVM, RIBs, or TCA. 
 
 * [Origins of the BFG Architecture](#origins-of-the-bfg-architecture)
 * [A General Guide to Architecture and App Feature Development](#a-general-guide-to-architecture-and-app-feature-development)
@@ -13,23 +13,23 @@ This approach focuses on creational code and its composition, not on a specific 
 
 ## Origins of the BFG Architecture
 
-The BFGA has several sources:
+The BFGA draws from several sources:
 
-* [RIBs](https://github.com/uber/RIBs) mobile architecture framework by Uber. A concept of _Builder_ has been taken from it.
-* [Graph-module approach](https://www.youtube.com/watch?v=iN8BtJxRBWs) by Yandex. A concept of _Graph_ is from this approach.
-* Other common architectures, design patterns, SOLID principles, MVC, MVP, VIPER, Undirectional Data Flow etc.
+* **Uber’s RIBs mobile architecture framework**, from which the concept of a _Builder_ is adapted.
+* **Yandex’s graph-module approach**, from [which](https://www.youtube.com/watch?v=iN8BtJxRBWs) the concept of a _Graph_ originates.
+* Other established architectures and design patterns, including SOLID principles, MVC, MVP, MVVM, VIPER, and Unidirectional Data Flow.
 
 ## A General Guide to Architecture and App Feature Development.
 
-An app is implemented as a __feature tree__. __Feature__ is an entity that represents product functionality or carries out an important role in a product.
+An application is structured as a __feature tree__. A __feature__ is an entity that represents a distinct piece of product functionality or fulfills a critical role within the product. 
 
-A feature can use services or other types of dependencies. The distinction between features and dependencies can be subjective.
+A feature may rely on services or other types of dependencies, though the distinction between features and dependencies can sometimes be subjective. 
 
-Do not use global objects, variables and any implicit dependencies.
+Avoid using global objects, global variables, or any implicit dependencies. 
 
 ## Builders
 
-A feature is instantiated by a _builder_. In general, a builder looks like:
+A feature is instantiated by a _builder_. In general, a builder follows this structure: 
 
 ```swift
 protocol FeatureBuilder {
@@ -50,17 +50,17 @@ final class FeatureBuilderImpl: FeatureBuilder {
 }
 ```
 
-A goal of a builder is to call a __feature graph__ initializer with required dependencies. Every feature has its own dependency scope. The feature gets external dependencies from the initializer of its builder. Inner dependencies are defined inside the scope of the builder.
+The primary purpose of a builder is to invoke a __feature graph__ initializer with the required dependencies. Every feature maintains its own dependency scope: external dependencies are passed into the builder's initializer, while internal dependencies are defined within the builder's scope. 
 
-A builder of a feature is created by a builder of a parent feature. A task of the parent feature is to choose an implementation of the builder of the child feature and to pass dependencies to it. These features do not have to have other logical connections between each other.
+A feature's builder is instantiated by the builder of its parent feature. The parent feature is responsible for selecting an implementation of the child feature's builder and supplying its dependencies. Beyond this relationship, parent and child features do not require any further logical coupling. 
 
-To include a feature in a component of a project you need to pass a builder of the feature to an initializer of the component.
+To integrate a feature into a project component, pass the feature's builder into that component's initializer. 
 
 ## Feature Graph
 
-In short, a __*feature graph*__ is a DI-contaner having an output of functionality that can be used in a project.
+In short, a __*feature graph*__ is a dependency injection (DI) container that exposes functional outputs for use across a project. 
 
-A [video](https://www.youtube.com/watch?v=iN8BtJxRBWs) from Yandex where a concept of feature graph is explained.
+A [video](https://www.youtube.com/watch?v=iN8BtJxRBWs) from Yandex explaining the concept of a feature graph.
 
 ```swift
 protocol AppGraph {
@@ -78,7 +78,7 @@ protocol SomeGraph {
 }
 ```
 
-A feature graph is a general concept for a feature having two or more outputs. If a feature is represented as a single object then the feature graph is redundant. For example, if a feature consists of an only screen then a builder should look like this:
+A feature graph is a general pattern intended for features with two or more outputs. If a feature is represented by a single object, a feature graph is redundant. For example, if a feature consists of only a single screen, its builder should be structured as follows
 
 ```swift
 protocol ViewControllerBuilder {
@@ -92,7 +92,7 @@ final class SomeScreenBuilder: ViewControllerBuilder {
 
 ## Communication between features
 
-If two features relate to each other in a child-parent way then you can make a parent to be a delegate of a child:
+If two features have a parent-child relationship, the parent can act as a delegate for the child. 
 
 ```swift
 protocol FeatureListener: AnyObject {
@@ -100,7 +100,7 @@ protocol FeatureListener: AnyObject {
 }
 ```
 
-Communication between 'distant' features can be arranged as follows:
+Communication between distant features can be implemented using the following approaches: 
 
 1) `NotificationCenter` or strictly-typed wrappers around it.
 
@@ -110,16 +110,16 @@ Communication between 'distant' features can be arranged as follows:
 
 ## The BFGA example
 
-[Personal Dictionary](https://github.com/maksimn/personal-dictionary-ios) is a project that is based on the BFGA approach. A feature tree of the app is
+[Personal Dictionary](https://github.com/maksimn/personal-dictionary-ios) is a sample project built using the BFGA approach. The application's feature tree is structured as follows
 
 ![alt text](https://raw.githubusercontent.com/maksimn/personal-dictionary-ios/main/pers-dict-arch.png "")
 
 `B` - builder, `G` - graph, `R` - router, `V` - view, `VC` - ViewController, `MVVM` - UI pattern, `UDF` - Unidirectional Data Flow, `D` - domain.
 
-## Appeal to the Community
+## Community Engagement
 
-Discussion of architectural problems and issues is encouraged. 
+Discussion regarding architectural challenges and potential issues is strongly encouraged. 
 
-If you have questions about this approach or have noticed any mistakes, please, inform about it. 
+If you have questions about this approach or have noticed any errors, please feel free to share your feedback.
 
 [My contact](https://t.me/maksimiv).
