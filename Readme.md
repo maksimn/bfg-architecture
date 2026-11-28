@@ -16,7 +16,7 @@ This approach focuses on creational code and its composition rather than on a sp
 The BFGA draws from several sources:
 
 * **Uber’s RIBs mobile architecture framework**, from which the concept of a _Builder_ is adapted.
-* [Yandex’s graph-module approach](https://www.youtube.com/watch?v=iN8BtJxRBWs), from which the concept of a _Graph_ originates.
+* **Yandex’s graph-module approach**, from [which](https://www.youtube.com/watch?v=iN8BtJxRBWs) the concept of a _Graph_ originates.
 * Other established architectures and design patterns, including SOLID principles, MVC, MVP, MVVM, VIPER, and Unidirectional Data Flow.
 
 ## A General Guide to Architecture and App Feature Development.
@@ -58,9 +58,9 @@ To integrate a feature into a project component, pass the feature's builder into
 
 ## Feature Graph
 
-In short, a __*feature graph*__ is a DI-contaner having an output of functionality that can be used in a project.
+In short, a __*feature graph*__ is a dependency injection (DI) container that exposes functional outputs for use across a project. 
 
-A [video](https://www.youtube.com/watch?v=iN8BtJxRBWs) from Yandex where a concept of feature graph is explained.
+A [video](https://www.youtube.com/watch?v=iN8BtJxRBWs) from Yandex explaining the concept of a feature graph.
 
 ```swift
 protocol AppGraph {
@@ -78,7 +78,7 @@ protocol SomeGraph {
 }
 ```
 
-A feature graph is a general concept for a feature having two or more outputs. If a feature is represented as a single object then the feature graph is redundant. For example, if a feature consists of an only screen then a builder should look like this:
+A feature graph is a general pattern intended for features with two or more outputs. If a feature is represented by a single object, a feature graph is redundant. For example, if a feature consists of only a single screen, its builder should be structured as follows
 
 ```swift
 protocol ViewControllerBuilder {
@@ -92,7 +92,7 @@ final class SomeScreenBuilder: ViewControllerBuilder {
 
 ## Communication between features
 
-If two features relate to each other in a child-parent way then you can make a parent to be a delegate of a child:
+If two features have a parent-child relationship, the parent can act as a delegate for the child. 
 
 ```swift
 protocol FeatureListener: AnyObject {
@@ -100,7 +100,7 @@ protocol FeatureListener: AnyObject {
 }
 ```
 
-Communication between 'distant' features can be arranged as follows:
+Communication between distant features can be implemented using the following approaches: 
 
 1) `NotificationCenter` or strictly-typed wrappers around it.
 
@@ -110,16 +110,16 @@ Communication between 'distant' features can be arranged as follows:
 
 ## The BFGA example
 
-[Personal Dictionary](https://github.com/maksimn/personal-dictionary-ios) is a project that is based on the BFGA approach. A feature tree of the app is
+[Personal Dictionary](https://github.com/maksimn/personal-dictionary-ios) is a sample project built using the BFGA approach. The application's feature tree is structured as follows
 
 ![alt text](https://raw.githubusercontent.com/maksimn/personal-dictionary-ios/main/pers-dict-arch.png "")
 
 `B` - builder, `G` - graph, `R` - router, `V` - view, `VC` - ViewController, `MVVM` - UI pattern, `UDF` - Unidirectional Data Flow, `D` - domain.
 
-## Appeal to the Community
+## Community Engagement
 
-Discussion of architectural problems and issues is encouraged. 
+Discussion regarding architectural challenges and potential issues is strongly encouraged. 
 
-If you have questions about this approach or have noticed any mistakes, please, inform about it. 
+If you have questions about this approach or have noticed any errors, please feel free to share your feedback.
 
 [My contact](https://t.me/maksimiv).
